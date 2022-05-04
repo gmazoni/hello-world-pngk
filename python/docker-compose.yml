@@ -1,0 +1,43 @@
+services:
+  pyserver1:
+    build: .
+    container_name: pyserver1
+    networks:
+      - server
+    volumes:
+      - .:/code
+    environment:
+      - APP_NAME=py_server_1
+      - PORT=5000
+    ports:
+      - "5000:5000"
+
+  pyserver2:
+    build: .
+    container_name: pyserver2
+    networks:
+      - server
+    volumes:
+      - .:/code
+    environment:
+      - APP_NAME=py_server_2
+      - PORT=5001
+    ports:
+      - "5001:5001"
+
+  pyserver3:
+    build: .
+    container_name: pyserver3
+    networks:
+      - server
+    volumes:
+      - .:/code
+    environment:
+      - APP_NAME=py_server_3
+      - PORT=5002
+    ports:
+      - "5002:5002"
+
+networks:
+  server:
+    name: server

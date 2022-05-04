@@ -1,0 +1,50 @@
+version: "3.9"
+services:
+  goserver1:
+    container_name: goserver1
+    build:
+      context: .
+      target: prod
+    environment:
+      - APP_NAME=go_server_1
+      - PORT=4000
+    networks:
+      - server
+    ports:
+      - 4000:4000
+    volumes:
+      - .:/app
+
+  goserver2:
+    container_name: goserver2
+    build:
+      context: .
+      target: prod
+    environment:
+      - APP_NAME=go_server_2
+      - PORT=4001
+    networks:
+      - server
+    ports:
+      - 4001:4001
+    volumes:
+      - .:/app
+
+  goserver3:
+    container_name: goserver3
+    build:
+      context: .
+      target: prod
+    environment:
+      - APP_NAME=go_server_3
+      - PORT=4002
+    networks:
+      - server
+    ports:
+      - 4002:4002
+    volumes:
+      - .:/app
+
+networks:
+  server:
+    name: server

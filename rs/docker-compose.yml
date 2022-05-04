@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  mongo1:
+    container_name: mongo1
+    image: mongo:5
+    volumes:
+      - db_data_1:/data/db
+      - ./rs-init.sh:/scripts/rs-init.sh
+    networks:
+      - mongors-network
+    links:
+      - mongo2
+      - mongo3
+    restart: always
+    entrypoint:
+      [
+        "/usr/bin/mongod",
+        "--bind_ip_all",
+        "--replSet",
+        "dbrs"
+      ]
+  mongo2:
+    container_name: mongo2
+    image: mongo:5
+    volumes:
+      - db_data_2:/data/db
+    networks:
+      - mongors-network
+    restart: always
+    entrypoint:
+      [
+        "/usr/bin/mongod",
+        "--bind_ip_all",
+        "--replSet",
+        "dbrs"
+      ]
+  mongo3:
+    container_name: mongo3
+    image: mongo:5
+    volumes:
+      - db_data_3:/data/db
+    networks:
+      - mongors-network
+    restart: always
+    entrypoint:
+      [
+        "/usr/bin/mongod",
+        "--bind_ip_all",
+        "--replSet",
+        "dbrs"
+      ]
+
+networks:
+  mongors-network:
+    name: mongors-network
+
+volumes:
+  db_data_1:
+    driver: local
+  db_data_2:
+    driver: local
+  db_data_3:
+    driver: local

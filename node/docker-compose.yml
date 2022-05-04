@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  node1:
+    image: node:alpine
+    container_name: node1
+    restart: always
+    environment:
+      - APP_NAME=server_1
+      - PORT=3000
+    networks:
+      - mongors-network
+      - server
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/root/
+    command: node /root/index.js
+
+  node2:
+    image: node:alpine
+    container_name: node2
+    restart: always
+    environment:
+      - APP_NAME=server_2
+      - PORT=3001
+    networks:
+      - mongors-network
+      - server
+    ports:
+      - 3001:3001
+    volumes:
+      - ./:/root/
+    command: node /root/index.js
+
+  node3:
+    image: node:alpine
+    container_name: node3
+    restart: always
+    environment:
+      - APP_NAME=server_3
+      - PORT=3002
+    networks:
+      - mongors-network
+      - server
+    ports:
+      - 3002:3002
+    volumes:
+      - ./:/root/
+    command: node /root/index.js
+
+networks:
+  mongors-network:
+    name: mongors-network
+  server:
+    name: server
