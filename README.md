@@ -1,6 +1,11 @@
 # hello-world-pngk
 
 ## Installation
+
+`sudo apt-get update`
+
+`sudo apt-get install -y apache2-utils`
+
 `chmod +x setup.sh`
 
 `chmod +x benchmark.sh`
